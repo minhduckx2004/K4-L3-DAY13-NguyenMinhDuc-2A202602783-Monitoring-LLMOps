@@ -29,7 +29,8 @@ def main() -> None:
 
     scenario = resolve_incident(args.scenario)
     path = f"/incidents/{scenario}/disable" if args.disable else f"/incidents/{scenario}/enable"
-    r = httpx.post(f"{BASE_URL}{path}", timeout=10.0)
+    with httpx.Client(timeout=10.0, trust_env=False) as client:
+        r = client.post(f"{BASE_URL}{path}")
     print(r.status_code, r.json())
 
 

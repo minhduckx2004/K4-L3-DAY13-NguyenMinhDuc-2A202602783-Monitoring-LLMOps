@@ -50,7 +50,7 @@ def main() -> None:
             if line.strip()
         ]
     
-    with httpx.Client(timeout=30.0) as client:
+    with httpx.Client(timeout=30.0, trust_env=False) as client:
         if args.concurrency > 1:
             with concurrent.futures.ThreadPoolExecutor(max_workers=args.concurrency) as executor:
                 futures = [executor.submit(send_request, client, payload) for payload in payloads]

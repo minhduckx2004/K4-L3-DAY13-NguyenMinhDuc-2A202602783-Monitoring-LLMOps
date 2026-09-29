@@ -1,25 +1,28 @@
 alerts:
-  - name: TODO_alert_1
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: fast_request_slo_burn
+    severity: critical
+    condition: 'fast_successful_requests_sli_pct < 99.5 AND request_count >= 20'
+    duration: 5m
     type: symptom-based
     channel: slack
-    owner: TODO
+    slack_channel: '#day13-alerts'
+    owner: Nguyen Minh Duc
     runbook: docs/alerts.md#alert-1
-  - name: TODO_alert_2
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: user_visible_error_rate
+    severity: critical
+    condition: 'request_failed / request_received * 100 > 2 AND request_count >= 20'
+    duration: 5m
     type: symptom-based
     channel: slack
-    owner: TODO
+    slack_channel: '#day13-alerts'
+    owner: Nguyen Minh Duc
     runbook: docs/alerts.md#alert-2
-  - name: TODO_alert_3
-    severity: TODO
-    condition: TODO
-    duration: TODO
+  - name: cost_budget_burn
+    severity: warning
+    condition: 'sum(cost_usd) over 24h > 2.5 USD'
+    duration: 10m
     type: symptom-based
     channel: slack
-    owner: TODO
+    slack_channel: '#day13-alerts'
+    owner: Nguyen Minh Duc
     runbook: docs/alerts.md#alert-3

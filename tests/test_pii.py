@@ -1,4 +1,5 @@
 from app.pii import scrub_text
+from app.logging_config import scrub_event
 
 
 def test_scrub_email() -> None:
@@ -20,3 +21,12 @@ def test_scrub_common_vietnamese_phone_formats() -> None:
         out = scrub_text(f"Contact: {phone_number}")
         assert phone_number not in out
         assert "REDACTED_PHONE_VN" in out
+
+
+def test_cccd_card_and_nested_log_payload_are_redacted() -> None:
+    event = {"payload": {"nested": ["CCCD 012345678901", "card 4111 1111 1111 1111"]}}
+    clean = scrub_event(None, "info", event)
+    assert "012345678901" not in str(clean)
+    assert "4111 1111 1111 1111" not in str(clean)
+    assert "REDACTED_CCCD" in str(clean)
+    assert "REDACTED_CREDIT_CARD" in str(clean)

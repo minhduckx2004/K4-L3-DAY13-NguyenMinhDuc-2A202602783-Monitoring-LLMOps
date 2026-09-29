@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-09-29T09:26:00.440795+00:00",
+  "latency": {
+    "P50": 150,
+    "P95": 2651,
+    "P99": 2651,
+    "TTFT P95": 50
+  },
+  "slo": {
+    "good": 21,
+    "total": 21,
+    "error_budget_requests_remaining": 0.105,
+    "sli_pct": 100.0
+  }
+}
